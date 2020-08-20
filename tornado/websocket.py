@@ -1450,7 +1450,7 @@ class WebSocketClientConnection(simple_httpclient._HTTPConnection):
         self.on_connection_close()
 
     def _on_http_response(self, response: httpclient.HTTPResponse) -> None:
-        if self.connect_future and not self.connect_future.done():
+        if not self.connect_future.done():
             if response.error:
                 self.connect_future.set_exception(response.error)
             else:
